@@ -6,6 +6,13 @@ import os
 
 load_dotenv()
 
+# Works on both local (.env) and Streamlit Cloud (st.secrets)
+try:
+    import streamlit as st
+    api_key = st.secrets["GROQ_API_KEY"]
+except Exception:
+    api_key = os.getenv("GROQ_API_KEY")
+
 db = SQLDatabase.from_uri("sqlite:///ecommerce_sqlite.db")
 
 llm = ChatGroq(
@@ -13,6 +20,12 @@ llm = ChatGroq(
     # "llama-3.1-8b-instant",
     temperature=0,
     api_key=os.getenv("GROQ_API_KEY")
+)
+
+llm_small = ChatGroq(
+    model="llama-3.1-8b-instant",
+    temperature=0,
+    api_key=api_key
 )
 
 SCHEMA_CONTEXT = """You are a data analyst assistant for an e-commerce company.
