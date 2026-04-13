@@ -1,21 +1,4 @@
-import os
-import sqlite3
-import duckdb
-import pandas as pd
 
-# Auto-create database on Streamlit Cloud if it doesn't exist
-if not os.path.exists("ecommerce_sqlite.db") or os.path.getsize("ecommerce_sqlite.db") == 0:
-    # Run db_setup to create ecommerce.db
-    exec(open("db_setup.py").read())
-    
-    # Export to SQLite for LangChain
-    duck = duckdb.connect("ecommerce.db")
-    con = sqlite3.connect("ecommerce_sqlite.db")
-    for table in ["products", "customers", "orders"]:
-        df = duck.execute(f"SELECT * FROM {table}").df()
-        df.to_sql(table, con, if_exists="replace", index=False)
-    duck.close()
-    con.close()
 
 import streamlit as st
 from agent import run_query, get_sql_for_chart
