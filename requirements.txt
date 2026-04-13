@@ -1,0 +1,10 @@
+langchain
+langchain-groq
+langchain-community
+duckdb
+streamlit
+plotly
+pandas
+python-dotenv
+reportlab
+sqlalchemy
