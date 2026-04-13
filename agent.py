@@ -17,9 +17,8 @@ db = SQLDatabase.from_uri("sqlite:///ecommerce_sqlite.db")
 
 llm = ChatGroq(
     model="llama-3.3-70b-versatile",
-    # "llama-3.1-8b-instant",
     temperature=0,
-    api_key=os.getenv("GROQ_API_KEY")
+    api_key=api_key
 )
 
 llm_small = ChatGroq(
