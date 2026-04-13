@@ -1,5 +1,5 @@
 .env
-*.db
+
 __pycache__/
 *.pyc
 query_history.json
